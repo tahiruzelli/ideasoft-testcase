@@ -23,7 +23,7 @@ const product = (state = initialState, action: any) => {
       return {
         ...state,
         isLoading: false,
-        products: payload?.data,
+        products: payload,
       };
     case GET_PRODUCTS_ERROR:
       return {

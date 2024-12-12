@@ -1,5 +1,6 @@
 import { Colors } from "@/src/utils/constans/colors";
 import { PageRoutes } from "@/src/utils/constans/page-routes";
+import { setToken } from "@/src/utils/helpers/token";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import {
@@ -25,6 +26,7 @@ export default function SplashOrganism() {
   };
 
   useEffect(() => {
+    setToken("AX5FTZ7UBAABUDT6XYYPW7LX");
     fadeIn();
     setTimeout(() => {
       router.replace(PageRoutes.home);

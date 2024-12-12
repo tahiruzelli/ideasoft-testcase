@@ -7,7 +7,7 @@ import { Colors } from "@/src/utils/constans/colors";
 import AppButton from "../../atoms/app-button";
 import { ButtonTypes } from "@/src/utils/enums/button-types";
 
-export default function Slider() {
+export default function ProductSlider() {
   function RenderItem() {
     return (
       <View style={styles.contentContainer}>

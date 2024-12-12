@@ -1,4 +1,4 @@
 export const urls = {
-  baseUrl: "https://api.dev.kamion.co/api/",
-  login: "v3/carrier/login",
+  baseUrl: "https://testcase.myideasoft.com/admin-api/",
+  product: "products",
 };

@@ -7,7 +7,7 @@ import { getToken } from "@/src/utils/helpers/token";
 
 function* getProductsTask(action: any) {
   try {
-    const response = yield call(axios.get, `${urls.baseUrl}${urls.login}`, {
+    const response = yield call(axios.get, `${urls.baseUrl}${urls.product}`, {
       headers: { Authorization: `Bearer ${getToken()}` },
     });
     const { data } = response;
