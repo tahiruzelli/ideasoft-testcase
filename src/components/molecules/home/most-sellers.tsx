@@ -22,7 +22,6 @@ export function MostSellers({ items }: MostSellersProps): JSX.Element {
       <AppText style={styles.titleStyle}>Çok Satanlar</AppText>
       <ScrollView horizontal={true}>
         {items.map((element, index) => {
-          console.log(index);
           return <Item key={index} item={element}></Item>;
         })}
       </ScrollView>
@@ -32,20 +31,20 @@ export function MostSellers({ items }: MostSellersProps): JSX.Element {
 
 function Item(props: any) {
   const [isFavorise, setIsFavorite] = useState(false);
+  const emptyImageUrl: string =
+    "https://cdn1.iconfinder.com/data/icons/business-company-1/500/image-512.png";
   return (
     <DropShadow style={styles.itemContainer}>
       <Image
         width={dimensions()._width * 0.42}
         height={dimensions()._width * 0.7}
         style={{ resizeMode: "stretch", borderRadius: 12 }}
-        source={
-          {
-            uri: "https://ideacdn.net/idea/kh/32/myassets/products/424/filename123.jpg?revision=1734025569",
-          }
-          //   props.item.images.length === 0
-          //     ? require("../../../../assets/images/empty-image.png")
-          //     : { uri: props.item.images[1].originalUrl }
-        }
+        source={{
+          uri:
+            props.item.images.length === 0
+              ? emptyImageUrl
+              : "https:" + props.item.images[0].originalUrl,
+        }}
       />
       <TouchableOpacity
         onPress={() => {
