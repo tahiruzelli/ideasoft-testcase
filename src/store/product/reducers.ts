@@ -3,10 +3,12 @@ import {
   GET_PRODUCTS_RESET,
   GET_PRODUCTS_STARTED,
   GET_PRODUCTS_SUCCESS,
+  SET_CURRENT_PRODUCT,
 } from "./types";
 
 const initialState = {
   products: [],
+  currentProduct: {},
   isLoading: true,
   error: null,
 };
@@ -35,6 +37,11 @@ const product = (state = initialState, action: any) => {
       return {
         ...state,
         products: {},
+      };
+    case SET_CURRENT_PRODUCT:
+      return {
+        ...state,
+        currentProduct: payload,
       };
 
     default:

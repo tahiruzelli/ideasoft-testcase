@@ -11,18 +11,29 @@ import dimensions from "@/src/utils/helpers/dimensions";
 import { LikeIcon } from "../../atoms/icons";
 import { useState } from "react";
 import DropShadow from "react-native-drop-shadow";
+import { router } from "expo-router";
+import { PageRoutes } from "@/src/utils/constans/page-routes";
 
 interface MostSellersProps {
   items: [];
+  onPress: (values: any) => {};
 }
 
-export function MostSellers({ items }: MostSellersProps): JSX.Element {
+export function MostSellers({ items, onPress }: MostSellersProps): JSX.Element {
   return (
     <View style={styles.container}>
       <AppText style={styles.titleStyle}>Çok Satanlar</AppText>
       <ScrollView horizontal={true}>
         {items.map((element, index) => {
-          return <Item key={index} item={element}></Item>;
+          return (
+            <Item
+              key={index}
+              item={element}
+              onPress={() => {
+                onPress(element);
+              }}
+            ></Item>
+          );
         })}
       </ScrollView>
     </View>
@@ -34,63 +45,66 @@ function Item(props: any) {
   const emptyImageUrl: string =
     "https://cdn1.iconfinder.com/data/icons/business-company-1/500/image-512.png";
   return (
-    <DropShadow style={styles.itemContainer}>
-      <Image
-        width={dimensions()._width * 0.42}
-        height={dimensions()._width * 0.7}
-        style={{ resizeMode: "stretch", borderRadius: 12 }}
-        source={{
-          uri:
-            props.item.images.length === 0
-              ? emptyImageUrl
-              : "https:" + props.item.images[0].originalUrl,
-        }}
-      />
-      <TouchableOpacity
-        onPress={() => {
-          setIsFavorite(!isFavorise);
-        }}
-        style={{ position: "absolute", top: 8, right: 8 }}
-      >
-        <LikeIcon color={isFavorise ? Colors.red : undefined}></LikeIcon>
-      </TouchableOpacity>
-      <DropShadow
-        style={[
-          styles.giftContainer,
-          { opacity: props.item.gift === "" ? 0 : 1 },
-        ]}
-      >
-        <AppText style={styles.giftText}>HEDIYELI</AppText>
-      </DropShadow>
-      <View
-        style={{
-          paddingHorizontal: 16,
-          flex: 1,
-          justifyContent: "space-evenly",
-        }}
-      >
-        <AppText style={styles.productTitle}>{props.item.name}</AppText>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <AppText
-            style={
-              props.item.discount === 0
-                ? styles.priceStyle
-                : styles.discontedPriceStyle
-            }
-          >
-            {props.item.price1}
-          </AppText>
-          <AppText
-            style={[
-              styles.discountStyle,
-              { opacity: props.item.discount === 0 ? 0 : 1 },
-            ]}
-          >
-            {props.item.discount}
-          </AppText>
+    <TouchableOpacity
+      onPress={() => {
+        props.onPress(props.item);
+      }}
+    >
+      <DropShadow style={styles.itemContainer}>
+        <Image
+          width={dimensions()._width * 0.42}
+          height={dimensions()._width * 0.7}
+          style={{ resizeMode: "stretch", borderRadius: 12 }}
+          source={{
+            uri:
+              props.item.images.length === 0
+                ? emptyImageUrl
+                : "https:" + props.item.images[0].originalUrl,
+          }}
+        />
+        <TouchableOpacity
+          onPress={() => {
+            setIsFavorite(!isFavorise);
+          }}
+          style={{ position: "absolute", top: 8, right: 8 }}
+        >
+          <LikeIcon color={isFavorise ? Colors.red : undefined}></LikeIcon>
+        </TouchableOpacity>
+        <DropShadow
+          style={[styles.giftContainer, { opacity: props.item.hasGift }]}
+        >
+          <AppText style={styles.giftText}>HEDIYELI</AppText>
+        </DropShadow>
+        <View
+          style={{
+            paddingHorizontal: 16,
+            flex: 1,
+            justifyContent: "space-evenly",
+          }}
+        >
+          <AppText style={styles.productTitle}>{props.item.name}</AppText>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <AppText
+              style={
+                props.item.discount === 0
+                  ? styles.priceStyle
+                  : styles.discontedPriceStyle
+              }
+            >
+              {props.item.price1}
+            </AppText>
+            <AppText
+              style={[
+                styles.discountStyle,
+                { opacity: props.item.discount === 0 ? 0 : 1 },
+              ]}
+            >
+              {props.item.discount}
+            </AppText>
+          </View>
         </View>
-      </View>
-    </DropShadow>
+      </DropShadow>
+    </TouchableOpacity>
   );
 }
 

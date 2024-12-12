@@ -6,10 +6,13 @@ import ProductSlider from "../../molecules/home/product-slider";
 import ImageSlider from "../../molecules/home/image-slider";
 import { useEffect, useState } from "react";
 import { MostSellers } from "../../molecules/home/most-sellers";
+import { router } from "expo-router";
+import { PageRoutes } from "@/src/utils/constans/page-routes";
 
 export default function HomeOrganism({
   products = [],
   getProducts = () => {},
+  setCurrentProduct = (values: any) => {},
 }) {
   const [stateProducts, setStateProducts] = useState([]);
 
@@ -27,7 +30,13 @@ export default function HomeOrganism({
       <HomeHeader></HomeHeader>
       <SearchInput onChange={(value: string) => {}}></SearchInput>
       <ScrollView>
-        <MostSellers items={stateProducts}></MostSellers>
+        <MostSellers
+          items={stateProducts}
+          onPress={(item: any) => {
+            setCurrentProduct(item);
+            router.push(PageRoutes.productDetail);
+          }}
+        ></MostSellers>
         <ProductSlider></ProductSlider>
         <ImageSlider></ImageSlider>
       </ScrollView>

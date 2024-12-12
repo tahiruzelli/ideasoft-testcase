@@ -8,4 +8,5 @@ export const Colors = {
   red: "red",
   gray: "gray",
   green: "green",
+  lightGray: "#D3D3D3",
 };
