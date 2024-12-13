@@ -1,13 +1,24 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { Colors } from "@/src/utils/constans/colors";
 import { SearchIcon } from "./icons";
 import DropShadow from "react-native-drop-shadow";
+import { router } from "expo-router";
+import { PageRoutes } from "@/src/utils/constans/page-routes";
 export default function SearchInput(props: any) {
   return (
     <DropShadow style={styles.inputContainer}>
       <SearchIcon></SearchIcon>
       <View style={{ width: 12 }}></View>
       <TextInput
+        onPress={
+          props.onChange === undefined
+            ? undefined
+            : () => {
+                if (props.push === true) {
+                  router.push(PageRoutes.searchPage);
+                }
+              }
+        }
         placeholder="Aramak istediğiniz ürünü yazınız"
         placeholderTextColor={Colors.paragraphColor}
         selectionColor={Colors.navy}

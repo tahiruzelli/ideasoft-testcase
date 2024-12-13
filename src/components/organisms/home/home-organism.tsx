@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { MostSellers } from "../../molecules/home/most-sellers";
 import { router } from "expo-router";
 import { PageRoutes } from "@/src/utils/constans/page-routes";
+import useDebounce from "@/src/utils/helpers/debounce";
 
 export default function HomeOrganism({
   products = [],
@@ -17,10 +18,6 @@ export default function HomeOrganism({
   const [stateProducts, setStateProducts] = useState([]);
 
   useEffect(() => {
-    getProducts();
-  }, []);
-
-  useEffect(() => {
     if (products.length !== 0) {
       setStateProducts(products);
     }
@@ -28,7 +25,7 @@ export default function HomeOrganism({
   return (
     <View style={{ backgroundColor: Colors.background, flex: 1 }}>
       <HomeHeader></HomeHeader>
-      <SearchInput onChange={(value: string) => {}}></SearchInput>
+      <SearchInput push={true}></SearchInput>
       <ScrollView>
         <MostSellers
           items={stateProducts}
