@@ -16,7 +16,9 @@ export default function HomeOrganism({
   setCurrentProduct = (values: any) => {},
 }) {
   const [stateProducts, setStateProducts] = useState([]);
-
+  useEffect(() => {
+    getProducts();
+  }, []);
   useEffect(() => {
     if (products.length !== 0) {
       setStateProducts(products);

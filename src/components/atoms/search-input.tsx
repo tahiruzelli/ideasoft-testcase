@@ -10,15 +10,11 @@ export default function SearchInput(props: any) {
       <SearchIcon></SearchIcon>
       <View style={{ width: 12 }}></View>
       <TextInput
-        onPress={
-          props.onChange === undefined
-            ? undefined
-            : () => {
-                if (props.push === true) {
-                  router.push(PageRoutes.searchPage);
-                }
-              }
-        }
+        onPress={() => {
+          if (props.push === true) {
+            router.push(PageRoutes.searchPage);
+          }
+        }}
         placeholder="Aramak istediğiniz ürünü yazınız"
         placeholderTextColor={Colors.paragraphColor}
         selectionColor={Colors.navy}

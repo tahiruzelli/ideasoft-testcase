@@ -3,13 +3,12 @@ import { TouchableOpacity, Image, View, StyleSheet } from "react-native";
 import DropShadow from "react-native-drop-shadow";
 import { LikeIcon } from "../../atoms/icons";
 import AppText from "../../atoms/app-text";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Colors } from "@/src/utils/constans/colors";
+import { links } from "@/src/utils/constans/urls";
 
 export default function MostSellerCard(props: any) {
   const [isFavorise, setIsFavorite] = useState(false);
-  const emptyImageUrl: string =
-    "https://cdn1.iconfinder.com/data/icons/business-company-1/500/image-512.png";
 
   return (
     <TouchableOpacity
@@ -25,7 +24,7 @@ export default function MostSellerCard(props: any) {
           source={{
             uri:
               props.item.images === undefined || props.item.images.length === 0
-                ? emptyImageUrl
+                ? links.emptyImageUrl
                 : "https:" + props.item.images[0].originalUrl,
           }}
         />
@@ -69,6 +68,14 @@ export default function MostSellerCard(props: any) {
               {props.item.discount}
             </AppText>
           </View>
+          {props.item.categories.length == 0 ? (
+            <View></View>
+          ) : (
+            <AppText>
+              <AppText>Category: </AppText>
+              <AppText>{props.item.categories[0].name}</AppText>
+            </AppText>
+          )}
         </View>
       </DropShadow>
     </TouchableOpacity>

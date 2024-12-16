@@ -4,10 +4,7 @@ import { Colors } from "@/src/utils/constans/colors";
 import { useEffect } from "react";
 import Carousel from "react-native-carousel-view";
 import dimensions from "@/src/utils/helpers/dimensions";
-import { useLocalSearchParams } from "expo-router";
 import AppText from "../../atoms/app-text";
-import AppButton from "../../atoms/app-button";
-import { ButtonTypes } from "@/src/utils/enums/button-types";
 import DropShadow from "react-native-drop-shadow";
 import Footer from "../../molecules/product/footer";
 
@@ -25,7 +22,6 @@ export default function ProductDetailOrganism({ product = {} }) {
         indicatorColor="gray"
       >
         {product.images.map((element: any, index: number) => {
-          console.log("https:" + element.originalUrl);
           return (
             <View
               key={index}
@@ -54,6 +50,15 @@ export default function ProductDetailOrganism({ product = {} }) {
         <AppText style={styles.stockAmount}>
           {"Stock Amount: " + product.stockAmount}
         </AppText>
+        {product.categories.length == 0 ? (
+          <View></View>
+        ) : (
+          <AppText>
+            <AppText>Category: </AppText>
+            <AppText>{product.categories[0].name}</AppText>
+          </AppText>
+        )}
+
         <View style={{ flexDirection: "row" }}>
           <AppText style={{ opacity: product.hasGift }}>
             If you bought this product, you will also have:{" "}
